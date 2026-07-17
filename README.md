@@ -4,53 +4,50 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey.svg)
 
-A fast, multi-threaded TCP port scanner written in Python. This tool identifies open ports, detects common services, attempts banner grabbing, and generates TXT and CSV reports.
+A fast, multi-threaded TCP port scanner written in Python. It identifies open TCP ports, detects common services, attempts banner grabbing, and exports scan results in TXT and CSV formats.
 
-> ⚠️ This project is intended for **educational purposes and authorized security testing only**.
+> ⚠️ **Disclaimer:** This project is intended for educational purposes and authorized security testing only.
 
 ---
 
-# Features
+## ✨ Features
 
 - Multi-threaded TCP Port Scanning
+- Interactive Mode
+- Command-Line Interface (CLI)
+- Hostname Resolution
 - Service Detection
 - Banner Grabbing
-- Hostname Resolution
 - TXT Report Generation
 - CSV Report Generation
 - Logging Support
-- Command Line Interface
 - Thread-safe Output
 - Scan Summary
 
 ---
 
-# Technologies Used
+## 🛠 Technologies Used
 
 - Python 3
-- Socket Library
+- Socket Programming
 - Threading
-- Argparse
+- argparse
 - CSV
 - Logging
 
 ---
 
-# Project Structure
+## 📂 Project Structure
 
-```
-Port Scanner/
+```text
+python-port-scanner/
 │
 ├── scanner.py
 ├── port_scanner.py
 ├── report.py
 ├── utils.py
 │
-├── docs/
-│   └── screenshots/
-│
 ├── results/
-├── tests/
 │
 ├── README.md
 ├── LICENSE
@@ -60,7 +57,14 @@ Port Scanner/
 
 ---
 
-# Installation
+## ⚙️ Requirements
+
+- Python 3.10 or later
+- Windows or Linux
+
+---
+
+## 🚀 Installation
 
 Clone the repository
 
@@ -68,7 +72,7 @@ Clone the repository
 git clone https://github.com/sattwxk/python-port-scanner.git
 ```
 
-Enter the project directory
+Enter the project
 
 ```bash
 cd python-port-scanner
@@ -82,13 +86,13 @@ python -m venv venv
 
 Activate it
 
-Windows
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Linux
+### Linux
 
 ```bash
 source venv/bin/activate
@@ -102,7 +106,23 @@ pip install -r requirements.txt
 
 ---
 
-# Usage
+## ▶️ Usage
+
+### Interactive Mode
+
+```bash
+python scanner.py
+```
+
+Example
+
+```text
+Enter Target IP / Hostname : 127.0.0.1
+Enter Start Port : 1
+Enter End Port : 100
+```
+
+### Command-Line Mode
 
 Scan localhost
 
@@ -118,9 +138,9 @@ python scanner.py -t scanme.nmap.org -s 20 -e 100
 
 ---
 
-# Example Output
+## 📊 Example Output
 
-```
+```text
 ============================================================
 Python Multi-threaded Port Scanner
 ============================================================
@@ -148,119 +168,85 @@ Time Taken : 0:00:01.72
 
 ---
 
-# Reports
+## 📄 Reports
 
-Every scan automatically generates
+Each scan generates:
 
-```
+```text
 results/
 
-scan_2026-07-09_18-42-20.txt
-
-scan_2026-07-09_18-42-20.csv
-```
-
-TXT Report
-
-```
-Port : 22
-Service : ssh
-Banner : OpenSSH
-
----------------------------------
-
-Port : 80
-Service : http
-Banner : Apache
-```
-
-CSV Report
-
-```
-Port,Service,Banner
-22,ssh,OpenSSH
-80,http,Apache
+scan_YYYY-MM-DD_HH-MM-SS.txt
+scan_YYYY-MM-DD_HH-MM-SS.csv
 ```
 
 ---
 
+## 🎯 Learning Objectives
 
-# Future Improvements
+This project demonstrates:
+
+- Python Networking
+- TCP Socket Programming
+- Multi-threading
+- File Handling
+- Logging
+- Command-Line Interfaces
+- Report Generation
+- Cybersecurity Fundamentals
+
+---
+
+## 🗺️ Roadmap
+
+### Version 1.1
+
+- Colored terminal output
+- Progress bar
+- JSON report export
+
+### Version 1.2
 
 - SYN Scan using Scapy
 - UDP Scanner
 - CIDR Network Scanner
+
+### Version 2.0
+
+- GUI
 - OS Detection
+- CVE Lookup
 - Banner Database
-- JSON Report Export
-- Progress Bar
-- Colored Output
-- REST API
-- GUI Version
 
 ---
 
-# Learning Objectives
+## 🤝 Contributing
 
-This project demonstrates
+Contributions, bug reports, and feature requests are welcome.
 
-- Python Networking
-- TCP Socket Programming
-- Threading
-- File Handling
-- Logging
-- Command Line Interfaces
-- Cybersecurity Fundamentals
-- Report Generation
+If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
 
 ---
 
-# Disclaimer
-
-This software is intended for educational purposes and authorized penetration testing only.
-
-Do not scan systems that you do not own or have explicit permission to test.
-
-The author is not responsible for misuse of this software.
-
----
-
-# License
+## 📜 License
 
 This project is licensed under the MIT License.
 
-See the LICENSE file for details.
+See the `LICENSE` file for details.
 
 ---
 
-# Author
+## 👨‍💻 Author
 
 **Sattwik Das**
-Linkedin : https://linkedin.com/in/sattwikd
-GitHub: https://github.com/sattwxk
 
-Version 1.1
------------
-✓ Colored Output
+- GitHub: https://github.com/sattwxk
+- LinkedIn: https://linkedin.com/in/sattwikd
 
-✓ Progress Bar
+---
 
-✓ JSON Export
-
-Version 1.2
------------
-✓ SYN Scan
-
-✓ UDP Scan
-
-✓ CIDR Scanner
-
-Version 2.0
------------
-✓ GUI
-
-✓ OS Detection
-
-✓ CVE Lookup
-
-✓ Banner Database
+⭐ If you found this project useful, consider giving it a star on GitHub!
