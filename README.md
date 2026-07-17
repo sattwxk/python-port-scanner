@@ -184,25 +184,6 @@ Port,Service,Banner
 
 ---
 
-# Screenshots
-
-Add screenshots here
-
-```
-docs/screenshots/
-```
-
-Example
-
-```
-terminal-output.png
-
-csv-report.png
-
-txt-report.png
-```
-
----
 
 # Future Improvements
 
@@ -257,3 +238,29 @@ See the LICENSE file for details.
 **Sattwik Das**
 Linkedin : https://linkedin.com/in/sattwikd
 GitHub: https://github.com/sattwxk
+
+Version 1.1
+-----------
+✓ Colored Output
+
+✓ Progress Bar
+
+✓ JSON Export
+
+Version 1.2
+-----------
+✓ SYN Scan
+
+✓ UDP Scan
+
+✓ CIDR Scanner
+
+Version 2.0
+-----------
+✓ GUI
+
+✓ OS Detection
+
+✓ CVE Lookup
+
+✓ Banner Database
