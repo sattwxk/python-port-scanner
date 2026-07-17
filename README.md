@@ -65,7 +65,7 @@ Port Scanner/
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/python-port-scanner.git
+git clone https://github.com/sattwxk/python-port-scanner.git
 ```
 
 Enter the project directory
