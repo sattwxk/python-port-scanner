@@ -8,6 +8,7 @@ import logging
 import socket
 import threading
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 from report import save_results
@@ -18,11 +19,13 @@ from utils import (
     validate_port_range,
 )
 
-# Thread-safe printing
+# Thread-safe printing / shared state
 print_lock = threading.Lock()
 
 # Store scan results
 results = []
+
+DEFAULT_WORKERS = 200
 
 
 def scan_port(target, port, timeout=1):
@@ -61,11 +64,11 @@ def scan_port(target, port, timeout=1):
                 "Banner": banner,
             }
 
-            results.append(port_info)
-
             logging.info(f"OPEN {port} ({service})")
 
             with print_lock:
+                results.append(port_info)
+
                 print("=" * 60)
                 print(f"[OPEN] Port    : {port}")
                 print(f"Service        : {service}")
@@ -99,7 +102,7 @@ def get_user_input():
         except ValueError:
             print("\nPlease enter valid numbers.\n")
 
-    return target, start, end, 1
+    return target, start, end, 1, DEFAULT_WORKERS
 
 
 def run():
@@ -135,10 +138,18 @@ def run():
         help="Socket timeout",
     )
 
+    parser.add_argument(
+        "-w",
+        "--workers",
+        default=DEFAULT_WORKERS,
+        type=int,
+        help=f"Max concurrent threads (default: {DEFAULT_WORKERS})",
+    )
+
     # If no arguments supplied → Interactive Mode
     if len(sys.argv) == 1:
 
-        target, start_port, end_port, timeout = get_user_input()
+        target, start_port, end_port, timeout, workers = get_user_input()
 
     else:
 
@@ -151,6 +162,11 @@ def run():
         start_port = args.start
         end_port = args.end
         timeout = args.timeout
+        workers = args.workers
+
+    if not validate_port_range(start_port, end_port):
+        print("\nInvalid port range.\n")
+        return
 
     target = resolve_target(target)
 
@@ -168,26 +184,24 @@ def run():
 
     print(f"Target     : {target}")
     print(f"Port Range : {start_port} - {end_port}")
+    print(f"Workers    : {workers}")
     print()
 
     results.clear()
 
     start_time = datetime.now()
 
-    threads = []
+    port_count = end_port - start_port + 1
+    max_workers = min(workers, port_count)
 
-    for port in range(start_port, end_port + 1):
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = [
+            executor.submit(scan_port, target, port, timeout)
+            for port in range(start_port, end_port + 1)
+        ]
 
-        thread = threading.Thread(
-            target=scan_port,
-            args=(target, port, timeout),
-        )
-
-        threads.append(thread)
-        thread.start()
-
-    for thread in threads:
-        thread.join()
+        for future in futures:
+            future.result()
 
     end_time = datetime.now()
 
